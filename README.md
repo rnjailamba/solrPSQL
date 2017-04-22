@@ -11,3 +11,9 @@ https://gist.github.com/rnjailamba/8c872768b136a88a10b1
 https://gist.github.com/rnjailamba/dc5068fbd883d963f7ec
 
 url of psql http://stackoverflow.com/questions/41921820/solr-postgresql-basic-configuration
+
+http://stackoverflow.com/questions/23228727/deleting-solr-documents-from-solr-admin
+
+querys https://cwiki.apache.org/confluence/display/solr/Common+Query+Parameters
+
+http://yonik.com/solr/query-syntax/
