@@ -1,5 +1,7 @@
 # Solr PSQL
 
+solr better than sql - http://stackoverflow.com/questions/4960952/when-to-consider-solr
+
 http://stackoverflow.com/questions/31733876/solr-and-postgresql-integration
 
 https://wiki.apache.org/solr/DataImportHandlerFaq#Running_Out_of_Memory_with_Postgresql
