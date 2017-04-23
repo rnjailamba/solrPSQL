@@ -24,11 +24,29 @@ edismax https://cwiki.apache.org/confluence/display/solr/The+Extended+DisMax+Que
 
 boost query http://stackoverflow.com/questions/29377720/how-to-down-boost-a-term-in-dismax
 
-functions https://cwiki.apache.org/confluence/display/solr/Function+Queries
+functions and show score https://cwiki.apache.org/confluence/display/solr/Function+Queries
 
 !boost stuff https://cwiki.apache.org/confluence/display/solr/Other+Parsers#OtherParsers-BoostQueryParser
 
 show score http://lucene.472066.n3.nabble.com/How-to-get-the-score-in-the-result-td493812.html
+
+search for prefix* http://stackoverflow.com/questions/21576868/solr-search-for-near-matches
+
+fuzzy searches http://lucene.apache.org/core/3_6_0/queryparsersyntax.html#Fuzzy%20Searches
+
+To read - querys
+https://www.finalist.nl/techblog/2015/06/improving-search-result-with-search-api-solr-custom-boosting/
+https://lucidworks.com/2011/12/14/options-to-tune-documents-relevance-in-solr/
+http://stackoverflow.com/questions/20217686/multiple-boost-queries-in-solr
+https://cwiki.apache.org/confluence/display/solr/Local+Parameters+in+Queries
+https://home.apache.org/~hossman/bbuzz2014/
+https://nolanlawson.com/2012/06/02/comparing-boost-methods-in-solr/
+https://cwiki.apache.org/confluence/display/solr/The+Extended+DisMax+Query+Parser
+https://cwiki.apache.org/confluence/display/solr/Other+Parsers#OtherParsers-BoostQueryParser
+
+To read - search
+http://stackoverflow.com/questions/11474778/solr-nearest-match-does-this-functionality-exist
+auto gen phrase querys http://stackoverflow.com/questions/16175234/solr-how-to-get-most-nearest-match-of-title
 
 proximity to number
 

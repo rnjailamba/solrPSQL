@@ -32,7 +32,7 @@
         <div id="navbar" class="navbar-collapse collapse">
           <form class="navbar-form navbar-right">
             <div class="form-group">
-              <input type="text" placeholder="Search" class="form-control">
+              <input type="text" placeholder="Search" class="form-control searchField">
             </div>
           
             <button type="submit" class="btn btn-success btnSearch">Search</button>
@@ -98,21 +98,27 @@
           'num_seen':1
         };
 
-        function fetchResults(){
-            $.ajax({ 
-              // url: "http://localhost:8983/solr/test/select?bf=div(1,abs(sub(" + $user['avg_calories'] +  ",calories)))^1&defType=edismax&indent=on&q=food_group:%22Proteins%22^" + $user['Proteins'] + "%20%20ORfood_group:%22Dairy%22^" + $user['Dairy'] + "%20%20ORfood_group:%22Grains%22^" + $user['Grains'] + "&wt=json&rows=1000",
+        function fetchResults(isSearch){
+            var urlSolr;
+            if(isSearch){
+              urlSolr = "http://localhost:8983/solr/test/select?fl=*,score&indent=on&q=" + $(".searchField").val()+ 
+              "~0.1&rows=1000&wt=json";
+            }
+            else{
+              urlSolr = "http://localhost:8983/solr/test/select?bf=div(1,abs(sub(" + $user['avg_calories'] +  ",calories)))^15&bq=food_group:%22Proteins%22^" + $user['Proteins'] + "%20+%20food_group:%22Dairy%22^" + $user['Dairy'] + "%20+%20food_group:%22Grains%22^" + $user['Grains'] + "&defType=edismax&fl=*,score&indent=on&q=(food_group:%22Proteins%22%20%20ORfood_group:%22Dairy%22%20%20ORfood_group:%22Grains%22)&rows=1000&wt=json";
+            }
 
-              url: "http://localhost:8983/solr/test/select?bf=div(1,abs(sub(" + $user['avg_calories'] +  ",calories)))^15&bq=food_group:%22Proteins%22^" + $user['Proteins'] + "%20+%20food_group:%22Dairy%22^" + $user['Dairy'] + "%20+%20food_group:%22Grains%22^" + $user['Grains'] + "&defType=edismax&fl=*,score&indent=on&q=(food_group:%22Proteins%22%20%20ORfood_group:%22Dairy%22%20%20ORfood_group:%22Grains%22)&rows=1000&wt=json",
+            $.ajax({ 
+              url: urlSolr,
               dataType: 'json',
               timeout: 1000,
-
-             data: {
+              data: {
                 format: 'json'
-             },
-             error: function() {
+              },
+              error: function() {
                 $('#info').html('<p>An error has occurred</p>');
-             },
-             success: function(data) {
+              },
+              success: function(data) {
                 $jsonData = data.response.docs;
                 // console.log(data.response.docs);
                 $('.rows').empty(); 
@@ -126,7 +132,7 @@
                                 }})                
                 var i;
                 for(i = 1 ; i <= docs.length ; i++){
-       
+
                   var $div = $('<div />', {
                                 "class": "col-md-3",
                                 text: "",
@@ -136,7 +142,8 @@
                                 }})
                   var $title = $('<h3>').text(docs[i-1].name);
                   var $description = $('<p>').text(docs[i-1].food_group);
-                  var $description1 = $('<p>').text(docs[i-1].calories);
+                  var $description1 = $('<p>').text("Calories - " + docs[i-1].calories);
+                  var $description2 = $('<p>').text(docs[i-1].score);
                   var $button = $('<button />', {
                                 "class": "btn btnActivity",
                                 "id": docs[i-1].id,
@@ -149,7 +156,7 @@
                                     console.log(clickedJson);
                                     updateUser(clickedJson.food_group,clickedJson.calories);
                                 }})
-                  $div.append($title).append($description).append($description1).append($button);
+                  $div.append($title).append($description).append($description1).append($description2).append($button);
                   $row.append($div);
                   if(i%4 == 0 && i != 0){
                     $('.rows').append($row);   
@@ -165,10 +172,11 @@
                 if(i % 4 != 0){
                   $('.rows').append($row);   
                 }                
-             },
-             type: 'GET'
+              },
+              type: 'GET'
           });          
         }
+
         displayUserPrefs();
         function displayUserPrefs(){
           $('.jumbotron').find('.json').html(JSON.stringify($user));
@@ -185,6 +193,7 @@
         function emptyRow(){
           $('.rows').empty();
         }
+
         function resetUser(){
           $user = {
             'Proteins' : 0,
@@ -195,6 +204,7 @@
           };
           displayUserPrefs();          
         } 
+
         function updateUser(food_group, calories){
           $user[food_group] ++;
           $user['avg_calories'] = (($user['avg_calories'] * $user['num_seen']) + calories)/($user['num_seen'] + 1);
@@ -203,7 +213,7 @@
         }    
 
         $('.btnSearch').click(function(){
-          fetchSearchResults();
+          fetchResults(true);
         })
 
         $('.btnReset').click(function(){
@@ -211,7 +221,7 @@
         })  
 
         $('.btnUpdateResults').click(function(){
-          fetchResults();
+          fetchResults(false);
         })                
 
       })
