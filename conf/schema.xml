@@ -122,9 +122,9 @@
     <field name="id" type="string" indexed="true" stored="true" required="true" multiValued="false" /> 
     <field name="name" type="string" indexed="true" stored="true" multiValued="false" />
     <field name="calories" type="float" indexed="true" stored="true" multiValued="false" />
-    <field name="carbs" type="float" indexed="true" stored="true" multiValued="false" />
-    <field name="protein" type="float" indexed="true" stored="true" multiValued="false" />
-    <field name="fat" type="float" indexed="true" stored="true" multiValued="false" />
+    <field name="carbs" type="string" indexed="true" stored="true" multiValued="false" />
+    <field name="protein" type="string" indexed="true" stored="true" multiValued="false" />
+    <field name="fat" type="string" indexed="true" stored="true" multiValued="false" />
     <field name="food_group" type="string" indexed="true" stored="true" multiValued="false" />
     <uniqueKey>id</uniqueKey>
 

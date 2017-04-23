@@ -60,7 +60,7 @@
     <document>
       <entity name="food" 
         pk="id" 
-        query="select id, name, calories, carbs, protein, fat, food_group from dietmasters limit 1;" />
+        query="select id, name, calories, carbs, protein, fat, food_group from dietmasters limit 1000;" />
         <field column="id" name="id"/>
         <field column="name" name="name"/>
         <field column="calories" name="calories"/>
